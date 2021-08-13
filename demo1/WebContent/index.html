@@ -7,6 +7,8 @@
 var req = new XMLHttpRequest();
 function findemp(custId){
 	req.open('GET','http://localhost:8080/demo1/api/customer/'+custId.value);
+	req.setRequestHeader("Accept","application/json");
+
 	req.onreadystatechange=function (){
 		if(req.status == 200 && req.readyState == 4){
 			var cust = JSON.parse(req.responseText);
