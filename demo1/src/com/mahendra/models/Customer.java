@@ -12,9 +12,11 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 //4 Properties must be private
 public class Customer implements Serializable {
 
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String email;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -37,11 +39,20 @@ public class Customer implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Customer(String firstName, String lastName, String email) {
+	
+	
+	public Customer(Integer id, String firstName, String lastName, String email) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	
