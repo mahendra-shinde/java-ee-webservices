@@ -8,7 +8,10 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Response;
 import java.util.*;
+
+
 
 @Path("/customer")
 public class CustomerResource {
@@ -17,21 +20,23 @@ public class CustomerResource {
 	
 	public CustomerResource() {
 		Customer c1 =  new Customer(1,"Rajiv","Bhatia","akki@yahoo.co.in");
+		Customer c2 =  new Customer(2,"Laxmikant","Berde","laxya@yahoo.co.in");
 		customerList.add(c1);
+		customerList.add(c2);
 	}
 	
 	
 	@GET
 	@Path("/{id}") // Resulting Path Suffix customer/{id}
 	@Produces({"application/json","application/xml"})
-	public Customer find(@PathParam("id")int id) {
+	public Response find(@PathParam("id")int id) {
 		for(Customer c : customerList) {
 			if(c.getId() == id) {
 				System.out.println("Found :"+c.getFirstName());
-				return c;
+				return Response.ok(c).build();
 			}
 		}
-		return null;
+		return Response.status(404).entity("Customer "+id+" not found").build();
 	}
 	
 	@POST

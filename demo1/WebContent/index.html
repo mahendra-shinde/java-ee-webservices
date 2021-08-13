@@ -3,8 +3,41 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript">
+var req = new XMLHttpRequest();
+function findemp(custId){
+	req.open('GET','http://localhost:8080/demo1/api/customer/'+custId.value);
+	req.onreadystatechange=function (){
+		if(req.status == 200 && req.readyState == 4){
+			var cust = JSON.parse(req.responseText);
+			document.getElementById("fn").innerHTML = cust.firstName;
+			document.getElementById("ln").innerHTML = cust.lastName;
+		}else if(req.status == 404 && req.readyState == 4){
+			var msg = req.responseText;
+			alert(msg);
+		}
+	}
+	req.send();
+	return false;
+}
+</script>
 </head>
 <body>
 <h1>Hello World</h1>
+<form>
+Customer ID : <input type="text" id="cuid"/>
+<input type="button" value="Find" onclick="findemp(this.form.cuid)" />
+</form>
+
+<table >
+<tr>
+	<td>First name: </td>
+	<td><span id="fn"> </span></td>
+</tr>
+<tr>
+	<td>Last name: </td>
+	<td><span id="ln"> </span></td>
+</tr>
+</table>
 </body>
 </html>
