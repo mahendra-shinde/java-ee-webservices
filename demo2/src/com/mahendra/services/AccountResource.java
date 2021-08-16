@@ -1,11 +1,15 @@
 package com.mahendra.services;
 
 import com.mahendra.exceptions.*;
+
+import javax.security.auth.login.AccountException;
 import javax.ws.rs.*;
 
 import com.mahendra.models.Account;
 
 @Path("/accounts")
+@Produces({"application/json","text/plain"})
+@Consumes("application/json")
 public class AccountResource {
 
 	@GET
@@ -20,5 +24,13 @@ public class AccountResource {
 		}
 	}
 	
-	
+	@POST
+	public Account create(Account account)throws AccountExistsException {
+		if(account.getAccNo()==101) {
+			throw new AccountExistsException(101);
+		}
+		else {
+			return account;
+		}
+	}
 }
