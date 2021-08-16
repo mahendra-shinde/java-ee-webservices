@@ -8,6 +8,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class MyApp extends ResourceConfig {
 
 	public MyApp() {
-		packages("com.mahendra.services");
+		packages("com.mahendra.services","com.mahendra.exceptions");
 	}
 }
